@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "s3_bucket_tfbackend" {
   }
 }
 
-resource "aws_s3_bucket_ownership_controls" "s3_bucket_tfbackend_acl_ownership" {
+resource "aws_s3_bucket_ownership_controls" "s3_bucket_tfbackend_acl_ownership_controls" {
   bucket = aws_s3_bucket.s3_bucket_tfbackend.id
 
   rule {
@@ -15,13 +15,13 @@ resource "aws_s3_bucket_ownership_controls" "s3_bucket_tfbackend_acl_ownership" 
 }
 
 resource "aws_s3_bucket_acl" "s3_bucket_tfbackend_acl" {
-  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_tfbackend_acl_ownership]
+  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_tfbackend_acl_ownership_controls]
 
   bucket = aws_s3_bucket.s3_bucket_tfbackend.id
   acl    = "private"
 }
 
-resource "aws_s3_bucket_versioning" "s3_bucket_tfbackend_vers" {
+resource "aws_s3_bucket_versioning" "s3_bucket_tfbackend_versioning" {
   bucket = aws_s3_bucket.s3_bucket_tfbackend.id
 
   versioning_configuration {

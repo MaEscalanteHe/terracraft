@@ -8,11 +8,11 @@ resource "aws_dynamodb_table" "dynamodb_tfstate_lock" {
     type = "S"
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   server_side_encryption {
     enabled = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
